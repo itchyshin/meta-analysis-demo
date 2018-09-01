@@ -90,7 +90,7 @@ $$
 \mathrm{SMD}=\frac{\bar{x}_{E}-\bar{x}_{C}}{\sqrt{\frac{(n_{C}-1)sd^2_{C}+(n_{E}-1)sd^2_{E}}{n_{C}+n_{E}-2}}}
 \end{aligned}
 $$
- where $\bar{x}_{C}$ and $\bar{x}_{E}$ are the means of the control and experimental group, respectively, *s**d* is sample standard deviation (*s**d*<sup>2</sup> is sample variance) and *n* is sample size.
+ where $\bar{x}_{C}$ and $\bar{x}_{E}$ are the means of the control and experimental group, respectively, *sd* is sample standard deviation (*sd*<sup>2</sup> is sample variance) and *n* is sample size.
 
 And its sample error variance is:
 
@@ -100,7 +100,7 @@ se^2_{\mathrm{SMD}}= \frac{n_{C}+n_{E}}{n_{C}n_{E}}+\frac{\mathrm{SMD}^2}{2(n_{C
 \end{aligned}
 $$
 
-The square root of this is referred to as 'standard error' (or the standard deviation of the estimate -- confused?). The inverse of this (1/*s**e*<sup>2</sup>) is used as 'weight', but things are bit more complicated than this as we will find out below.
+The square root of this is referred to as 'standard error' (or the standard deviation of the estimate -- confused?). The inverse of this (1/*se*<sup>2</sup>) is used as 'weight', but things are bit more complicated than this as we will find out below.
 
 Another common index is called 'response ratio', which is usually presented in its natural logarithm form (lnRR):
 
@@ -189,7 +189,7 @@ forest(dat$yi[1:12], dat$vi[1:12])
 
 ![](README_files/figure-markdown_github/forest2-1.png)
 
-We can calculate many different kinds of effect sizes with `escalc`; other common effect size statistics include *Z**r* (Fisher's z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio -- mouthful!), which compare variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of `metafor`, let you do this with `escalc`-- [github page](https://github.com/cran/metafor). lnCVR is called "CVR" in `escalc`. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight!
+We can calculate many different kinds of effect sizes with `escalc`; other common effect size statistics include *Zr* (Fisher's z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio -- mouthful!), which compare variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of `metafor`, let you do this with `escalc`-- [github page](https://github.com/cran/metafor). lnCVR is called "CVR" in `escalc`. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight!
 
 ### Fixed-effect and random-effects models
 
@@ -243,7 +243,7 @@ exp(0.2)
 
     ## [1] 1.221403
 
-This means a plant trait (e.g. mass) was 22% larger in the experimental (RR$=\\bar{x}\_{E}/\\bar{x}\_{C}$), which seems like a pretty large effect to me (remember we need to interpret our results in a biological meaningful way). Note that [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality) states that this is a bit of wrong but we do not get into this today.
+This means a plant trait (e.g. mass) was 22% larger in the experimental (RR$=\bar{x}_{E}/\bar{x}_{C}$), which seems like a pretty large effect to me (remember we need to interpret our results in a biological meaningful way). Note that [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality) states that this is a bit of wrong but we do not get into this today.
 
 ### Running a randm-effects model
 
@@ -296,7 +296,7 @@ We recently did a meta-analysis of meta-analyses (a secondary meta-analysis) loo
 
 ### Meta-regression (the random-effects model)
 
-The existence of heterogeneity sets a scene for meta-regression. This means that we now put predictors ('moderators' in the meta-analytic terminology) into our model to explain heterogeneity (equivalent to normal regression models). Fitting meta-regression is pretty straightforward too. We fit three moderators collected by the authors: 1) `time` (how long the experiment was), 2) `method` (different ways of increasing CO**<sub>2</sub>), and 3) `fungroup` (functional group, i.e., angiosperm, gymnosperm or N**<sub>2</sub> fixer).
+The existence of heterogeneity sets a scene for meta-regression. This means that we now put predictors ('moderators' in the meta-analytic terminology) into our model to explain heterogeneity (equivalent to normal regression models). Fitting meta-regression is pretty straightforward too. We fit three moderators collected by the authors: 1) `time` (how long the experiment was), 2) `method` (different ways of increasing CO<sub>2</sub>), and 3) `fungroup` (functional group, i.e., angiosperm, gymnosperm or N<sub>2</sub> fixer).
 
 ``` r
 # REML which is the default and the best method for the random-effect
@@ -341,7 +341,7 @@ Well, they do not explain anything! Look at the *R*<sup>2</sup> value and, as yo
 
 ### Checking for publication bias
 
-OK, it seems like an CO**<sub>2</sub> increase promotes plant growth (which may not be surprising), but we are assuming the data set we have does not suffer form publication bias.
+OK, it seems like an CO<sub>2</sub> increase promotes plant growth (which may not be surprising), but we are assuming the data set we have does not suffer form publication bias.
 
 > Publication bias in its simplest form is that signficant results are more likely to be published than non-signficant results.
 
@@ -458,7 +458,7 @@ This model is based on the paper by Henmi and Copas (2010). Although it is more 
 
 Up to now, we completely ignored non-independence among effect sizes. We assumed that we have one effect size from one study (or paper). But in reality, a paper usually contains multiple effect sizes. These effect sizes from the same studies are not independent of each other. Let's consider model where we have several effect sizes from single studies like our data set. First, I give you a math representation:
 
-where *u*<sub>*i**j*</sub> is a deviation from *s*<sub>*i*</sub> (the within-study effect; the *j*th effect size from the *i*th study),it is normally distributed with *σ*<sup>2</sup> (other notations are comparable as above).
+where *u*<sub>*ij*</sub> is a deviation from *s*<sub>*i*</sub> (the within-study effect; the *j*th effect size from the *i*th study),it is normally distributed with *σ*<sup>2</sup> (other notations are comparable as above).
 
 We can visualize this (again Figure 4 from Nakagawa et al. 2017). And we can see why this model is called, a 'multilevel' meta-analytic model, an extension of the random-effects model.
 
@@ -497,7 +497,7 @@ summary(multilevel_m)
 
 OK, this does not have *I*<sup>2</sup>. We have actually proposed a multilevel-model version of *I*<sup>2</sup> (Nakagawa & Santos 2012), which, in this case, can be written as:
 
-Note that we do have *τ*<sup>2</sup> and *σ*<sup>2</sup>, which are `sigma^2.1` and `sigma^2.2` in the output above, respectively. Using this formula, we have the total heterogeneity *I*<sup>2</sup> of 88.93% (the $\\bar{v} = 0.0033$ for our data set; see Nakagawa & Santos 2012 for how to get this). As you might expect, this value is nearly identical to what we got from the random-effect model (88.9%). But this model is better as we are explicitly dealing with non-independence arising from effect sizes from the same studies (although it turns out the problem is not completely solved...).
+Note that we do have *τ*<sup>2</sup> and *σ*<sup>2</sup>, which are `sigma^2.1` and `sigma^2.2` in the output above, respectively. Using this formula, we have the total heterogeneity *I*<sup>2</sup> of 88.93% (the $\bar{v} = 0.0033$ for our data set; see Nakagawa & Santos 2012 for how to get this). As you might expect, this value is nearly identical to what we got from the random-effect model (88.9%). But this model is better as we are explicitly dealing with non-independence arising from effect sizes from the same studies (although it turns out the problem is not completely solved...).
 
 As you could probably imagine, we can add more levels to this multilevel models. For example, we could add `genus` in the data set, as related species are probably more similar to each other. But it is better to model this taxonomic non-independence using phylogeny (which is the topic of the next section). Note that we can also run meta-regression using `rma.mv`; more complex models (different versions of a multilevel model) are explained in Nakagawa & Santos (2012).
 
