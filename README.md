@@ -86,18 +86,18 @@ This data set is from the paper by Curtis and Wang (1998). They looked at the ef
 There are several 'standardized' effect sizes, which are unit-less. When we have two groups to compare, we use two types of effect size statistics. The first one is standardized mean difference (SMD or also known as Cohen's *d* or Hedge's *d* or *g*; some subtle differences between them, but we do not worry about them for now):
 
 $$
-\\begin{aligned}
-\\mathrm{SMD}=\\frac{\\bar{x}\_{E}-\\bar{x}\_{C}}{\\sqrt{\\frac{(n\_{C}-1)sd^2\_{C}+(n\_{E}-1)sd^2\_{E}}{n\_{C}+n\_{E}-2}}}
-\\end{aligned}
+\begin{aligned}
+\mathrm{SMD}=\frac{\bar{x}_{E}-\bar{x}_{C}}{\sqrt{\frac{(n_{C}-1)sd^2_{C}+(n_{E}-1)sd^2_{E}}{n_{C}+n_{E}-2}}}
+\end{aligned}
 $$
- where $\\bar{x}\_{C}$ and $\\bar{x}\_{E}$ are the means of the control and experimental group, respectively, *s**d* is sample standard deviation (*s**d*<sup>2</sup> is sample variance) and *n* is sample size.
+ where $\bar{x}_{C}$ and $\bar{x}_{E}$ are the means of the control and experimental group, respectively, *s**d* is sample standard deviation (*s**d*<sup>2</sup> is sample variance) and *n* is sample size.
 
 And its sample error variance is:
 
 $$
-\\begin{aligned}
-se^2\_{\\mathrm{SMD}}= \\frac{n\_{C}+n\_{E}}{n\_{C}n\_{E}}+\\frac{\\mathrm{SMD}^2}{2(n\_{C}+n\_{E})}
-\\end{aligned}
+\begin{aligned}
+se^2_{\mathrm{SMD}}= \frac{n_{C}+n_{E}}{n_{C}n_{E}}+\frac{\mathrm{SMD}^2}{2(n_{C}+n_{E})}
+\end{aligned}
 $$
 
 The square root of this is referred to as 'standard error' (or the standard deviation of the estimate -- confused?). The inverse of this (1/*s**e*<sup>2</sup>) is used as 'weight', but things are bit more complicated than this as we will find out below.
@@ -288,7 +288,7 @@ For this output from the random-effects model has more things than that of the c
 
 In other words, real variation in the data. I think *I*<sup>2</sup> is a quite important index as it can tell the percentage of real variation in your meta-analytic data. It can be given by (which you saw within the figure of the random-effects model above):
 
-where $\\bar{v}$ is a representative value of *v*<sub>*i*</sub> (or think $\\bar{v}$ as the average of *v*<sub>*i*</sub> although it is not quite it). Note that the denominator is the whole variance which exists in the data. The benchmark values for *I*2 are 25, 50 and 75% for low, moderate and high heterogeneity, respectively (Higgins et al. 2003).
+where $\bar{v}$ is a representative value of *v*<sub>*i*</sub> (or think $\bar{v}$ as the average of *v*<sub>*i*</sub> although it is not quite it). Note that the denominator is the whole variance which exists in the data. The benchmark values for *I*2 are 25, 50 and 75% for low, moderate and high heterogeneity, respectively (Higgins et al. 2003).
 
 Our *I*<sup>2</sup> value is 88.9% so very high and this value is, as you expect, statistically significant, tested with the *Q* value (which follows a *χ*<sup>2</sup> distribution defined by the df value, in this case *d**f* = 101).
 
