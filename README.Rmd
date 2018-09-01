@@ -5,6 +5,8 @@ output:
 ---
 # Meta-analysis using metafor
 
+<!-- README.md is generated from README.Rmd. Please edit that file ; but some latex formula etc gets messed up - not quite sure why-->
+
 ## Background
 
 What is a meta-analysis?
